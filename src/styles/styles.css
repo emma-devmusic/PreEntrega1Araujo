@@ -1,0 +1,13 @@
+.navbar-brand__logo {
+    width: 110px;
+}
+
+#cartWidget svg {
+    color: rgb(210, 210, 210);
+}
+#cartWidget span {
+    color: white;
+}
+.navbar form {
+    gap: .7rem;
+}
