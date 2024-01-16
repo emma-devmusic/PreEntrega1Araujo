@@ -1,13 +1,14 @@
+import { Outlet } from 'react-router-dom';
 import { ItemListContainer } from './components/ItemListContainer';
 import { Navbar } from './components/Navbar';
 
-function App() {
+export const App = () => {
+
   return (
     <>
       <Navbar />
       <ItemListContainer greeting={'Bienvenidos'} />
+      <Outlet />
     </>
   )
 }
-
-export default App

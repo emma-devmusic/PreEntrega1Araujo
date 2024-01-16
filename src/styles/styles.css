@@ -1,7 +1,11 @@
+/*
+=====================================================
+NAVBAR
+=====================================================
+*/
 .navbar-brand__logo {
     width: 110px;
 }
-
 #cartWidget svg {
     color: rgb(210, 210, 210);
 }
@@ -10,4 +14,50 @@
 }
 .navbar form {
     gap: .7rem;
+}
+
+
+
+
+/*
+=====================================================
+PRODUCT PAGE
+=====================================================
+*/
+#product .box {
+    gap: .5rem;
+}
+#product .box .img{
+    width: auto;
+}
+#product .box .img img {
+    border-radius: 5px;
+    height: 100%;
+    max-height: 600px;
+    object-fit: contain;
+}
+#product .desc {
+    min-width: 400px;
+}
+.counter {
+    gap: 1rem;
+}
+
+
+
+
+
+
+/*
+=====================================================
+ERROR PAGE
+=====================================================
+*/
+
+.logoErrorPage {
+    max-width: 250px;
+}
+
+#errorPage a {
+    width: 100px;
 }
