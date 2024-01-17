@@ -10,8 +10,10 @@ export const Categories = () => {
     const [products, setProducts] = useState([])
 
     useEffect(() => {
-        setProducts(
-            getProductsByCategory(params.categoryId)
+        getProductsByCategory(params.categoryId).then(
+            (resp) => {
+                setProducts(resp)
+            }
         )
     }, [params])
 

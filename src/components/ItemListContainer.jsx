@@ -2,12 +2,18 @@ import { useLocation } from "react-router-dom"
 import { productsMock } from "../mock/asyncMock"
 import { CardItem } from "./CardItem"
 import { useEffect, useState } from "react"
+import { getProducts } from "../helpers/getters"
 
 export const ItemListContainer = ({ greeting }) => {
 
     const [products, setProducts] = useState([])
 
     useEffect(() => {
+        getProducts().then(
+            (resp) => {
+                setProducts(resp)
+            }
+        )
         setProducts(productsMock)
     },[])
 

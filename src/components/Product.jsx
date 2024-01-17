@@ -8,8 +8,10 @@ export const Product = () => {
     const [prod, setProd] = useState([]);
 
     useEffect(() => {
-        setProd(
-            getProductById(params.itemId)
+        getProductById(params.itemId).then(
+            function(resp) {
+                setProd(resp)
+            }
         )
     }, [params])
 
