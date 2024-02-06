@@ -6,7 +6,9 @@ export const productsMock = [
         color: 'Negro',
         size: 'M',
         category: 'Remeras',
-        img: "../assets/img/remera-guitarra.webp"
+        img: "../assets/img/remera-guitarra.webp",
+        price: 5000,
+        stock: 10
     },
     {
         id: 2,
@@ -15,7 +17,9 @@ export const productsMock = [
         color: 'Bordó',
         size: 'L',
         category: 'Remeras',
-        img: '../assets/img/remera-pua.webp'
+        img: '../assets/img/remera-pua.webp',
+        price: 5000,
+        stock: 10
     },
     {
         id: 3,
@@ -24,7 +28,9 @@ export const productsMock = [
         color: 'Negro',
         size: 'XL',
         category: 'Remeras',
-        img: '../assets/img/remera-indio.webp'
+        img: '../assets/img/remera-indio.webp',
+        price: 5000,
+        stock: 10
     },
     {
         id: 4,
@@ -33,7 +39,9 @@ export const productsMock = [
         color: 'Gris',
         size: 'M',
         category: 'Buzos',
-        img: '../assets/img/buzo-pua.webp'
+        img: '../assets/img/buzo-pua.webp',
+        price: 5000,
+        stock: 10
     },
     {
         id: 5,
@@ -42,7 +50,9 @@ export const productsMock = [
         color: 'Gris',
         size: 'L',
         category: 'Buzos',
-        img: '../assets/img/buzo-galactico.webp'
+        img: '../assets/img/buzo-galactico.webp',
+        price: 5000,
+        stock: 10
     },
     {
         id: 6,
@@ -51,7 +61,9 @@ export const productsMock = [
         color: 'Negro',
         size: 'L',
         category: 'Buzos',
-        img: '../assets/img/buzo-friza.webp'
+        img: '../assets/img/buzo-friza.webp',
+        price: 5000,
+        stock: 10
     },
     {
         id: 7,
@@ -60,6 +72,8 @@ export const productsMock = [
         color: 'Negro',
         size: 'L',
         category: 'Camperas',
-        img: '../assets/img/campera-parka.webp'
+        img: '../assets/img/campera-parka.webp',
+        price: 5000,
+        stock: 10
     },
 ]

@@ -1,14 +1,17 @@
 import { Outlet } from 'react-router-dom';
 import { ItemListContainer } from './components/ItemListContainer';
 import { Navbar } from './components/Navbar';
+import { CartProvider } from './context/CartContext';
 
 export const App = () => {
 
   return (
     <>
-      <Navbar />
-      <ItemListContainer greeting={'Bienvenidos'} />
-      <Outlet />
+      <CartProvider>
+        <Navbar />
+        <ItemListContainer greeting={'Bienvenidos'} />
+        <Outlet />
+      </CartProvider>
     </>
   )
 }
