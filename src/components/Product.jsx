@@ -1,17 +1,16 @@
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { getProductById } from "../helpers/getters"
 import { useContext, useEffect, useState } from "react"
 import { CartContext } from "../context/CartContext";
 
 export const Product = () => {
 
-    const params = useParams();
-
     const { addItem } = useContext(CartContext)
-
     const [prod, setProd] = useState({});
     const [quantity, setQuantity] = useState('0');
-
+    const params = useParams();
+    const [isAdded, setIsAdded] = useState(false);
+    const navigate = useNavigate();
     useEffect(() => {
         getProductById(params.itemId).then(
             function(resp) {
@@ -26,11 +25,16 @@ export const Product = () => {
     }
 
     const handleAdd = () => {
-
+        if(isAdded) {
+            navigate('/cart')
+            return
+        }
+        if(quantity == '0') {
+            return
+        }
         const item = {id: prod.id, name: prod.name, price: prod.price}
-
-        addItem(item, quantity)
-        console.log('Agregar al carrito: ', quantity, ' del producto ', prod.name)
+        addItem(item, quantity);
+        setIsAdded(true)
     }
 
     return (
@@ -67,7 +71,7 @@ export const Product = () => {
                             onClick={ handleAdd }
                             className="btn btn-outline-danger mt-3 w-100"
                         >
-                            Agregar al carrito
+                            { isAdded ? 'Terminar Compra' : 'Agregar al carrito' }
                         </button>
                     </div>
                 </div>
