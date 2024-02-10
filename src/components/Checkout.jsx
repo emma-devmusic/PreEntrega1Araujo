@@ -1,10 +1,41 @@
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { CartContext } from "../context/CartContext"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { checkingFormValues } from "../helpers/helpers";
+import { OrderDataContext } from "../context/OrderData";
 
 export const Checkout = () => {
+    const navigate = useNavigate()
+    const {total} = useContext(CartContext);
+    const {setOrderData} = useContext(OrderDataContext);
+    const [formValues, setFormValues] = useState({
+        name: '',
+        email: '',
+        phone: '',
+        check: false
+    })
 
-    const {total} = useContext(CartContext)
+    const handleInputChange = ({target}) => {
+        setFormValues({
+            ...formValues,
+            [target.name]: target.value
+        })
+    }
+    const handlerCheckbox = ({target}) => {
+        setFormValues({
+            ...formValues,
+            check: target.checked
+        })
+    }
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if(checkingFormValues(formValues).length === 0) {
+            setOrderData(formValues)
+            navigate('/order')
+        }
+    }
+
 
     return (
         <div className="container mt-4">
@@ -16,31 +47,21 @@ export const Checkout = () => {
                     <h5 className="text-center mt-3 mb-3">No tienes nada para confirmar el pago</h5>
                     <Link to={'/'} className="btn btn-danger">Regresar a la tienda</Link>
                 </div>
-                : <div className="d-flex checkout">
+                : <form className="d-flex checkout">
                     <div className="card p-4 w-50">
-                        <form>
-                            <div className="mb-3">
-                                <label htmlFor="correo" className="form-label">Correo electrónico</label>
-                                <input type="email" className="form-control" id="correo" aria-describedby="emailHelp"/>
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="telefono" className="form-label">Teléfono</label>
-                                <input type="phone" className="form-control" id="telefono"/>
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="direccion" className="form-label">Dirección</label>
-                                <input type="text" className="form-control" id="direccion"/>
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="ciudad" className="form-label">Ciudad</label>
-                                <input type="text" className="form-control" id="ciudad"/>
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="pais" className="form-label">País</label>
-                                <input type="text" className="form-control" id="pais"/>
-                            </div>
-                            <div id="emailHelp" className="form-text mb-4">Nunca compartiremos tu información con nadie.</div>
-                        </form>
+                        <div className="mb-3">
+                            <label htmlFor="name" className="form-label">Nombre</label>
+                            <input name="name" type="text" className="form-control" id="name" value={formValues.name} onChange={handleInputChange}/>
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="correo" className="form-label">Correo electrónico</label>
+                            <input name="email" type="email" className="form-control" id="correo"  value={formValues.email} onChange={handleInputChange}/>
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="telefono" className="form-label">Teléfono</label>
+                            <input name="phone" type="phone" className="form-control" id="telefono" value={formValues.phone} onChange={handleInputChange}/>
+                        </div>
+                        <div id="emailHelp" className="form-text mb-4">Nunca compartiremos tu información con nadie.</div>
                     </div>
                     <div className="card p-4 w-50 h-50">
                         <h6>Selecciona tu método de pago preferido</h6>
@@ -51,12 +72,19 @@ export const Checkout = () => {
                             <option value="3">Pago en Local</option>
                         </select>
                         <div className="mb-3 form-check">
-                            <input type="checkbox" className="form-check-input" id="terminos"/>
+                            <input type="checkbox" className="form-check-input" id="terminos" name="check" value={formValues.check}  onChange={handlerCheckbox}/>
                             <label className="form-check-label" htmlFor="terminos">Acepto los términos y condiciones de servicio</label>
                         </div>
-                        <button type="submit" className="btn btn-danger">Pagar</button>
+                        <button 
+                            className="btn btn-danger mb-2"
+                            onClick={handleSubmit}  
+                        >Generar Orden</button>
+                        {
+                            checkingFormValues(formValues).map( e => <div className="form-text text-danger m-0" key={e}>*{e}</div>)
+                        }
                     </div>
-                </div>
+                </form>
+                
             }
         </div>
     )

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
-export const CartItem = ({ data }) => {
-
+export const CartItem = ({ data, removeItem }) => {
     const [quant, setQuant] = useState(data.quantity)
     const handleInputChange = (e) => {
         setQuant(e.target.value)
@@ -21,7 +20,7 @@ export const CartItem = ({ data }) => {
                 />
             </td>
             <td className='pt-3'>{data.price}</td>
-            <td> <div className='text-center btn btn-outline-danger'>Borrar</div> </td>
+            <td> <div onClick={() => removeItem(data.id)} className='text-center btn btn-outline-danger'>Borrar</div> </td>
         </tr>
     )
 }

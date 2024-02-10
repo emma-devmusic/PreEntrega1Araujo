@@ -5,7 +5,7 @@ import { CartResume } from './CartResume'
 
 export const CartView = () => {
 
-    const { cart, total } = useContext(CartContext)
+    const { cart, total, removeItem } = useContext(CartContext)
 
     return (
         <div className='container cart-view'>
@@ -27,7 +27,7 @@ export const CartView = () => {
                             </thead>
                             <tbody>
                                 {
-                                    cart.map( (e, i) => <CartItem key={i} data={e} /> )
+                                    cart.map( (e, i) => <CartItem key={i} data={e} removeItem={removeItem} /> )
                                 }
                             </tbody>
                         </table>
