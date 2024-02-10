@@ -3,16 +3,18 @@ import { OrderDataContext } from '../context/OrderData'
 import { CartContext } from '../context/CartContext';
 import { addDoc, collection, documentId, getDocs, query, where, writeBatch } from 'firebase/firestore';
 import { db } from '../services/firebase/firebaseConfig';
+import { Ticket } from './Ticket';
 
 export const Order = () => {
     const { userData } = useContext(OrderDataContext);
     const [orderId, setOrderId] = useState(null)
-    const { cart, total } = useContext(CartContext);
+    const { cart, total, clearCart } = useContext(CartContext);
+    
     const createOrder = async () => {
         const objOrder = {
             buyer: userData,
             items: cart,
-            total
+            total: total()
         }
         const batch = writeBatch(db)
         const ids = cart.map( prod => prod.id)
@@ -34,7 +36,7 @@ export const Order = () => {
         if(outOfStock.length === 0) {
             batch.commit()
             const orderCollection = collection(db, 'orders')
-            const {id} = await addDoc(orderCollection);
+            const {id} = await addDoc(orderCollection, objOrder);
             setOrderId(id);
         }
     }
@@ -42,11 +44,13 @@ export const Order = () => {
         createOrder()
     },[])
     if(orderId) return (
-        <div className='d-flex justify-content-center align-items-center'>
-            <h3 className='text-center'>El id de su compra es {orderId}</h3>
-        </div>
+        <Ticket id={orderId} buyer={userData} items={cart} total={total()} />
     )
     return (
-        <div>Order</div>
+        <div className="container d-flex justify-content-center mt-5">
+            <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+            </div>
+        </div>
     )
 }

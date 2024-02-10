@@ -5,7 +5,6 @@ export const CartItem = ({ data, removeItem }) => {
     const handleInputChange = (e) => {
         setQuant(e.target.value)
     }
-
     return (
         <tr className='cart-table-row'>
             <td className='pt-3'>{data.name}</td>

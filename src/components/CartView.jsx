@@ -35,8 +35,6 @@ export const CartView = () => {
                 </div>
                 <CartResume total={total()} />
             </div>
-            
-
         </div>
     )
 }
