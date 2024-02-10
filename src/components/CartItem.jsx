@@ -1,13 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 export const CartItem = ({ data }) => {
-    console.log(data)
+
+    const [quant, setQuant] = useState(data.quantity)
+    const handleInputChange = (e) => {
+        setQuant(e.target.value)
+    }
+
     return (
-        <tr className=''>
-            <td className=''>{data.name}</td>
-            <td className=''>{data.quantity}</td>
-            <td className=''>{data.price}</td>
-            <td> borrar </td>
+        <tr className='cart-table-row'>
+            <td className='pt-3'>{data.name}</td>
+            <td className=''>
+                <input 
+                    type="number"
+                    className="form-control" 
+                    placeholder="0" 
+                    min={1}
+                    value={quant}
+                    onChange={handleInputChange}
+                />
+            </td>
+            <td className='pt-3'>{data.price}</td>
+            <td> <div className='text-center btn btn-outline-danger'>Borrar</div> </td>
         </tr>
     )
 }

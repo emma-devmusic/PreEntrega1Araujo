@@ -7,16 +7,25 @@ import { getProducts } from "../helpers/getters"
 export const ItemListContainer = ({ greeting }) => {
 
     const [products, setProducts] = useState([])
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        getProducts().then(
-            (resp) => {
-                setProducts(resp)
-            }
-        )
-        setProducts(productsMock)
+        setLoading(true)
+        getProducts()
+        .then( resp => setProducts(resp) )
+        .catch(error => console.error(error))
+        .finally( () => setLoading(false) )
     },[])
 
+
+    if(loading) return (
+        <div className="container d-flex justify-content-center mt-5">
+            <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    )
+    
     return (
         <div className="container">
             {

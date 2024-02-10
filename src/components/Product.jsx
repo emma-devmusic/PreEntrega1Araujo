@@ -7,16 +7,18 @@ export const Product = () => {
 
     const { addItem } = useContext(CartContext)
     const [prod, setProd] = useState({});
-    const [quantity, setQuantity] = useState('0');
+    const [quantity, setQuantity] = useState('1');
     const params = useParams();
     const [isAdded, setIsAdded] = useState(false);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+
     useEffect(() => {
-        getProductById(params.itemId).then(
-            function(resp) {
-                setProd(resp)
-            }
-        )
+        setLoading(true)
+        getProductById(params.itemId)
+        .then( resp => setProd(resp) )
+        .catch(error => console.error(error))
+        .finally( () => setLoading(false) )
     }, [params]);
 
     const handleInputChange = (e) => {
@@ -36,6 +38,14 @@ export const Product = () => {
         addItem(item, quantity);
         setIsAdded(true)
     }
+    
+    if(loading) return (
+        <div className="container d-flex justify-content-center mt-5">
+            <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    )
 
     return (
         <div className="container" id="product">

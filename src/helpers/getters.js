@@ -1,21 +1,40 @@
-import { productsMock } from "../mock/asyncMock";
+import { db } from "../services/firebase/firebaseConfig";
+import { getDocs, collection, doc, getDoc, query, where } from "firebase/firestore";
 
-export const getProducts = () => new Promise( (res, rej) => {
-    setTimeout(() => {
-        res(productsMock)    
-    }, 1000);
+export const getProducts = () => new Promise((resolve, reject) => {
+    const productsCollection = collection(db, 'products')
+    getDocs(productsCollection)
+    .then( resp => {
+            const productsAdapted = resp.docs.map( doc => {
+                const fields = doc.data()
+                return {id: doc.id, ...fields}
+            })
+            resolve(productsAdapted)
+        }
+    ).catch(error => {reject(error)})
 })
 
 export const getProductById = (id) => new Promise( (res, rej) => {
-    setTimeout(() => {
-        let result = productsMock.find( e => e.id == id)
-        res(result)    
-    }, 1000);
+    const product = doc(db, 'products', id)
+    getDoc(product)
+    .then( resp => {
+        const prod = resp.data()
+        res({id: resp.id, ...prod})
+    } )
+    .catch( error => rej(error))
 })
 
 export const getProductsByCategory = (category) => new Promise( (res, rej) => {
-    setTimeout(() => {
-        let filter = productsMock.filter( e => e.category.toLowerCase() == category.toLowerCase())
-        res(filter)
-    }, 1000);
+    const productsCollection = query( 
+        collection(db, 'products'), where('category', '==', category)
+    )
+    getDocs(productsCollection)
+    .then( resp => {
+            const productsAdapted = resp.docs.map( doc => {
+                const fields = doc.data()
+                return {id: doc.id, ...fields}
+            })
+            res(productsAdapted)
+        }
+    ).catch(error => {rej(error)})
 })

@@ -1,5 +1,20 @@
 /*
 =====================================================
+APP
+=====================================================
+*/
+
+#appContainer {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+
+
+/*
+=====================================================
 NAVBAR
 =====================================================
 */
@@ -61,11 +76,69 @@ PRODUCT PAGE
 ERROR PAGE
 =====================================================
 */
-
 .logoErrorPage {
     max-width: 250px;
 }
 
 #errorPage a {
     width: 100px;
+}
+
+
+
+
+
+/*
+=====================================================
+CART VIEW
+=====================================================
+*/
+.cart-view .box-container-resume {
+    gap: 1rem;
+}
+.boxResumen {
+    width: 100%;
+}
+.boxResumen p {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+}
+.cart-table-row input {
+    width: 60px;
+}
+
+
+
+
+
+/*
+=====================================================
+CHECKOUT PAGE
+=====================================================
+*/
+.form-check-input:checked {
+    border-color: #dc3545;
+    background-color: #dc3545;
+}
+
+.checkout {
+    gap: 1rem;
+}
+
+
+
+/*
+=====================================================
+FOOTER
+=====================================================
+*/
+
+footer p{
+    color: #999999;
+}
+
+footer hr {
+    border-color: #999999   ;
+    width: 50%;
 }
