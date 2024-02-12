@@ -14,7 +14,7 @@ Esta app es el proyecto final de CODERHOUSE. Una tienda ecommerce con base de da
 Para levantar el proyecto simplemente hay que seguir los siguientes pasos:
 1) Clonar el repositorio
 2) Ejecutar el comando "npm install"
-39 Luego, una vez se tengan listas las variables de entorno, ejecutar "npm run dev"
+3) Luego, una vez se tengan listas las variables de entorno, ejecutar "npm run dev"
 
 # Vista previa
 ![Urbana Rock - Tienda - Google Chrome 2024-02-11 22-10-16](https://github.com/emma-devmusic/PreEntrega1Araujo/assets/86156227/8fe12625-16d7-4cb7-aa3d-44ca98a7fae7)
